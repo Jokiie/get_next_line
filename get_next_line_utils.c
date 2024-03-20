@@ -5,24 +5,34 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ccodere <ccodere@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/15 13:24:40 by ccodere           #+#    #+#             */
-/*   Updated: 2024/03/15 13:24:40 by ccodere          ###   ########.fr       */
+/*   Created: 2024/03/17 11:02:18 by ccodere           #+#    #+#             */
+/*   Updated: 2024/03/17 11:02:18 by ccodere          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
 
 size_t	ft_strlen(char *s)
 {
 	size_t len;
 
 	len = 0;
-	if (s == NULL || *s == 0)
+	if (s == NULL)
 		return (0);
+	if (*s == 0)
+		return (1);
 	while (s[len])
 		len++;
 	return (len);
+}
+
+void	ft_strscat(char *buffer, char *s1, char *s2)
+{
+	while (*s1)
+		*buffer++ = *s1++;
+	while (*s2)
+		*buffer++ = *s2++;
+	*buffer = '\0';
 }
 
 char	*ft_strjoin(char *s1, char *s2)
@@ -37,22 +47,15 @@ char	*ft_strjoin(char *s1, char *s2)
 	return (buffer);
 }
 
-void	ft_strscat(char *buffer, char *s1, char *s2)
-{
-	while (*s1)
-		*buffer++ = *s1++;
-	while (*s2)
-		*buffer++ = *s2++;
-	*buffer = '\0';
-}
-
 char	*ft_strdup(char *src)
 {
 	char *buffer;
+	size_t srclen;
 
 	if (!src)
 		return (NULL);
-	buffer = (char *)malloc(sizeof(char) * ft_strlen(src) + 1);
+	srclen = ft_strlen(src);
+	buffer = (char *)malloc((srclen + 1) * sizeof(char));
 	if (!buffer)
 		return (NULL);
 	while (*src)
@@ -76,9 +79,12 @@ char	*ft_substr(char *s, unsigned int start, size_t len)
 		len = srclen - start;
 	sub_s = (char *)malloc((len + 1) * sizeof(char));
 	if (!sub_s)
+	{
+		free(sub_s);
 		return (NULL);
+	}
 	i = 0;
-	while (i < len)
+	while (i < len && s[start + i])
 	{
 		sub_s[i] = s[start + i];
 		i++;
