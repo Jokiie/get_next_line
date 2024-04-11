@@ -12,34 +12,27 @@
 
 #include "get_next_line.h"
 
-
 int	main(void)
 {
-	int fd;
-	char *line;
+	int		fd;
+	int		count;
+	char	*line;
 
-	fd = open("exemple.txt", O_RDONLY);
+	fd = open("text.txt", O_RDONLY | O_CREAT);
 	if (fd == -1)
 	{
-		printf("Error while opening the file!\n");
-		return (1);
+		perror("Error opening the file.");
+		return (KO);
 	}
+	count = 0;
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
-		printf("%s", line);
-		// free(line);
-			// Assurez-vous de libérer la mémoire allouée pour chaque ligne
+		count += printf("%s", line);
+		free(line);
 		line = get_next_line(fd);
 	}
-	printf("\n");
-	printf("%s", get_next_line(fd));
-	printf("\n");
-	printf("%s", get_next_line(fd));
-	printf("\n");
-	printf("%s", get_next_line(fd));
-	printf("\n");
-	free(line);
+	printf("\nCounted %d characters.\n", count);
 	close(fd);
-	return (0);
+	return (OK);
 }

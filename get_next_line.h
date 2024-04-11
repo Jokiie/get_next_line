@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ccodere <ccodere@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/17 11:02:30 by ccodere           #+#    #+#             */
-/*   Updated: 2024/03/17 11:02:30 by ccodere          ###   ########.fr       */
+/*   Created: 2024/04/11 13:34:43 by ccodere           #+#    #+#             */
+/*   Updated: 2024/04/11 13:34:43 by ccodere          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,11 @@
 #  define BUFFER_SIZE 42
 # endif
 
+# define TRUE 1
+# define FALSE 0
+# define OK 0
+# define KO 1
+
 # include <fcntl.h>
 # include <stddef.h>
 # include <stdio.h>
@@ -23,9 +28,8 @@
 # include <unistd.h>
 
 char	*get_next_line(int fd);
-char	*ft_strjoin(char *s1, char *s2);
-void	ft_strscat(char *buffer, char *s1, char *s2);
-char	*ft_strdup(char *src);
-char	*ft_substr(char *s, unsigned int start, size_t len);
 size_t	ft_strlen(char *s);
+char	*ft_strjoin(char *remainder, char *buffer);
+char	*ft_strchr(char *str, int c);
+char	*ft_strdup(char *src);
 #endif

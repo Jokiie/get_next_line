@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ccodere <ccodere@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/15 13:25:03 by ccodere           #+#    #+#             */
-/*   Updated: 2024/04/11 13:32:45 by ccodere          ###   ########.fr       */
+/*   Created: 2024/04/11 13:53:43 by ccodere           #+#    #+#             */
+/*   Updated: 2024/04/11 13:54:32 by ccodere          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static char	*_append(char *remainder, char *buffer)
 	char	*copy;
 
 	if (!remainder)
-		remainder = ft_strjoin("", "");
+		remainder = ft_strdup("");
 	copy = remainder;
 	remainder = ft_strjoin(copy, buffer);
 	free(copy);
@@ -62,7 +62,7 @@ static char	*_put_next(char *line, char *remainder)
 		i++;
 	}
 	if (newline)
-		remainder = ft_strjoin("", newline + 1);
+		remainder = ft_strdup(newline + 1);
 	else
 		remainder = ft_strdup("");
 	if (*remainder == '\0')

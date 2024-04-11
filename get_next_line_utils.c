@@ -14,81 +14,72 @@
 
 size_t	ft_strlen(char *s)
 {
-	size_t len;
+	size_t	i;
 
-	len = 0;
-	if (s == NULL)
-		return (0);
-	if (*s == 0)
-		return (1);
-	while (s[len])
-		len++;
-	return (len);
-}
-
-void	ft_strscat(char *buffer, char *s1, char *s2)
-{
-	while (*s1)
-		*buffer++ = *s1++;
-	while (*s2)
-		*buffer++ = *s2++;
-	*buffer = '\0';
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
 }
 
 char	*ft_strjoin(char *s1, char *s2)
 {
-	char *buffer;
+	char			*strs;
+	size_t			len;
+	unsigned int	i;
+	unsigned int	j;
 
-	buffer = (char *)malloc(((ft_strlen(s1) + ft_strlen(s2)) + 1)
-			* sizeof(char));
-	if (!buffer)
+	if (!s1 && !s2)
 		return (NULL);
-	ft_strscat(buffer, s1, s2);
-	return (buffer);
+	len = ft_strlen(s1) + ft_strlen(s2);
+	strs = (char *)malloc((len + 1) * sizeof(char));
+	if (!strs)
+		return (NULL);
+	i = 0;
+	j = 0;
+	if (s1)
+		while (s1[j])
+			strs[i++] = s1[j++];
+	j = 0;
+	while (s2[j])
+		strs[i++] = s2[j++];
+	strs[i] = '\0';
+	return (strs);
+}
+
+char	*ft_strchr(char *str, int c)
+{
+	unsigned int	i;
+	size_t			len;
+
+	if (!str)
+		return (NULL);
+	i = 0;
+	len = ft_strlen(str);
+	while (i < (len + 1))
+	{
+		if (str[i] == (char )c)
+			return ((char *)&str[i]);
+		i++;
+	}
+	return (OK);
 }
 
 char	*ft_strdup(char *src)
 {
-	char *buffer;
-	size_t srclen;
+	int		i;
+	char	*dst;
+	size_t	len;
 
 	if (!src)
 		return (NULL);
-	srclen = ft_strlen(src);
-	buffer = (char *)malloc((srclen + 1) * sizeof(char));
-	if (!buffer)
+	len = ft_strlen(src);
+	dst = (char *)malloc(sizeof(char) * (len + 1));
+	if (!dst)
 		return (NULL);
-	while (*src)
-		*buffer++ = *src++;
-	*buffer = '\0';
-	return (buffer);
-}
-
-char	*ft_substr(char *s, unsigned int start, size_t len)
-{
-	char *sub_s;
-	size_t srclen;
-	size_t i;
-
-	if (!s)
-		return (NULL);
-	srclen = ft_strlen(s);
-	if (start > srclen)
-		return (malloc(1 * sizeof(char)));
-	if (len > srclen - start)
-		len = srclen - start;
-	sub_s = (char *)malloc((len + 1) * sizeof(char));
-	if (!sub_s)
-	{
-		free(sub_s);
-		return (NULL);
-	}
 	i = 0;
-	while (i < len && s[start + i])
-	{
-		sub_s[i] = s[start + i];
-		i++;
-	}
-	sub_s[i] = '\0';
-	return (sub_s);
+	while (src[i++])
+		dst[i] = src[i];
+	dst[i] = '\0';
+	return (dst);
 }
