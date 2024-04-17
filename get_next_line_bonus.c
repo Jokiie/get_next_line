@@ -6,7 +6,7 @@
 /*   By: ccodere <ccodere@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 13:53:43 by ccodere           #+#    #+#             */
-/*   Updated: 2024/04/17 14:01:08 by ccodere          ###   ########.fr       */
+/*   Updated: 2024/04/17 15:53:42 by ccodere          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static char	*_append(char *remainder, char *buffer)
 	char	*copy;
 
 	if (!remainder)
-		remainder = ft_strdup("");
+		remainder = ft_strjoin("", "");
 	copy = remainder;
 	remainder = ft_strjoin(copy, buffer);
 	free(copy);
@@ -62,9 +62,9 @@ static char	*_extract_remainder(char *line, char *remainder)
 		i++;
 	}
 	if (newline)
-		remainder = ft_strdup(newline + 1);
+		remainder = ft_strjoin("", newline + 1);
 	else
-		remainder = ft_strdup("");
+		remainder = ft_strjoin("", "");
 	if (!*remainder)
 	{
 		free(remainder);
@@ -81,6 +81,8 @@ char	*get_next_line(int fd)
 	char		*buffer;
 
 	buffer = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
+	if (!buffer)
+		return (NULL);
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, &buffer, 0) < 0)
 	{
 		free(buffer);
@@ -89,8 +91,6 @@ char	*get_next_line(int fd)
 		remainder[fd] = NULL;
 		return (NULL);
 	}
-	if (!buffer)
-		return (NULL);
 	line = _read_n_append(fd, remainder[fd], buffer);
 	free(buffer);
 	buffer = NULL;

@@ -6,7 +6,7 @@
 /*   By: ccodere <ccodere@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 13:54:19 by ccodere           #+#    #+#             */
-/*   Updated: 2024/04/17 14:05:18 by ccodere          ###   ########.fr       */
+/*   Updated: 2024/04/17 15:39:24 by ccodere          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,11 @@
 #  define BUFFER_SIZE 42
 # endif
 
-# define FD_MAX 1024
+# define FD_MAX 10240
 
 # include <stdlib.h>
 # include <unistd.h>
+# include <fcntl.h>
 
 char	*get_next_line(int fd);
 size_t	ft_strlen(char *str);
