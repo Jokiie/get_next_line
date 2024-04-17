@@ -4,6 +4,9 @@
         "/Users/ccodere/my_cursus/get_next_line/get_next_line.h" // Chemin absolu vers vos headers
     ],
     "files.associations": {
-        "fcntl.h": "c"
+        "fcntl.h": "c",
+        "get_next_line_bonus.h": "c",
+        "stddef.h": "c",
+        "unistd.h": "c"
     }
 }

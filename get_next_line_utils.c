@@ -12,14 +12,14 @@
 
 #include "get_next_line.h"
 
-size_t	ft_strlen(char *s)
+size_t	ft_strlen(char *str)
 {
-	size_t	i;
+	size_t	len;
 
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
+	len = 0;
+	while (str[len])
+		len++;
+	return (len);
 }
 
 char	*ft_strjoin(char *s1, char *s2)
@@ -62,14 +62,15 @@ char	*ft_strchr(char *str, int c)
 			return ((char *)&str[i]);
 		i++;
 	}
-	return (OK);
+	return (0);
 }
 
 char	*ft_strdup(char *src)
 {
-	int		i;
-	char	*dst;
-	size_t	len;
+	unsigned int	i;
+	unsigned int	j;
+	char			*dst;
+	size_t			len;
 
 	if (!src)
 		return (NULL);
@@ -78,8 +79,9 @@ char	*ft_strdup(char *src)
 	if (!dst)
 		return (NULL);
 	i = 0;
-	while (src[i++])
-		dst[i] = src[i];
+	j = 0;
+	while (src[j])
+		dst[i++] = src[j++];
 	dst[i] = '\0';
 	return (dst);
 }

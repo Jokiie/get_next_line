@@ -16,20 +16,12 @@
 #  define BUFFER_SIZE 42
 # endif
 
-# define TRUE 1
-# define FALSE 0
-# define OK 0
-# define KO 1
-
-# include <fcntl.h>
-# include <stddef.h>
-# include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
 
 char	*get_next_line(int fd);
-size_t	ft_strlen(char *s);
-char	*ft_strjoin(char *remainder, char *buffer);
+size_t	ft_strlen(char *str);
+char	*ft_strjoin(char *s1, char *s2);
 char	*ft_strchr(char *str, int c);
 char	*ft_strdup(char *src);
 #endif

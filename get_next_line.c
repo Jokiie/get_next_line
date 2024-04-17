@@ -6,7 +6,7 @@
 /*   By: ccodere <ccodere@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 13:25:03 by ccodere           #+#    #+#             */
-/*   Updated: 2024/04/11 13:32:45 by ccodere          ###   ########.fr       */
+/*   Updated: 2024/04/17 13:45:51 by ccodere          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static char	*_append(char *remainder, char *buffer)
 	char	*copy;
 
 	if (!remainder)
-		remainder = ft_strjoin("", "");
+		remainder = ft_strdup("");
 	copy = remainder;
 	remainder = ft_strjoin(copy, buffer);
 	free(copy);
@@ -25,30 +25,30 @@ static char	*_append(char *remainder, char *buffer)
 	return (remainder);
 }
 
-static char	*_read_n_append(int fd, char *remainder, char *line)
+static char	*_read_n_append(int fd, char *remainder, char *buffer)
 {
 	ssize_t	chars_read;
 
 	chars_read = 1;
 	while (chars_read > 0)
 	{
-		chars_read = read(fd, line, BUFFER_SIZE);
+		chars_read = read(fd, buffer, BUFFER_SIZE);
 		if (chars_read == -1)
 		{
 			free(remainder);
-			return (OK);
+			return (0);
 		}
 		else if (chars_read == 0)
 			break ;
-		line[chars_read] = '\0';
-		remainder = _append(remainder, line);
-		if (ft_strchr(line, '\n'))
+		buffer[chars_read] = '\0';
+		remainder = _append(remainder, buffer);
+		if (ft_strchr(buffer, '\n'))
 			break ;
 	}
 	return (remainder);
 }
 
-static char	*_put_next(char *line, char *remainder)
+static char	*_extract_remainder(char *line, char *remainder)
 {
 	char	*newline;
 	ssize_t	i;
@@ -58,14 +58,14 @@ static char	*_put_next(char *line, char *remainder)
 	while (line[i] != '\n')
 	{
 		if (line[i] == '\0')
-			return (OK);
+			return (0);
 		i++;
 	}
 	if (newline)
-		remainder = ft_strjoin("", newline + 1);
+		remainder = ft_strdup(newline + 1);
 	else
 		remainder = ft_strdup("");
-	if (*remainder == '\0')
+	if (!*remainder)
 	{
 		free(remainder);
 		remainder = NULL;
@@ -96,6 +96,6 @@ char	*get_next_line(int fd)
 	buffer = NULL;
 	if (!line)
 		return (NULL);
-	remainder = _put_next(line, remainder);
+	remainder = _extract_remainder(line, remainder);
 	return (line);
 }
