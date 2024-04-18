@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ccodere <ccodere@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/17 11:02:18 by ccodere           #+#    #+#             */
-/*   Updated: 2024/03/17 11:02:18 by ccodere          ###   ########.fr       */
+/*   Created: 2024/04/17 11:02:18 by ccodere           #+#    #+#             */
+/*   Updated: 2024/04/17 11:02:18 by ccodere          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ size_t	ft_strlen(char *str)
 	size_t	len;
 
 	len = 0;
+	if (!str)
+		return (0);
 	while (str[len])
 		len++;
 	return (len);

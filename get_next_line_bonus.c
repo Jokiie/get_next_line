@@ -6,7 +6,7 @@
 /*   By: ccodere <ccodere@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 13:53:43 by ccodere           #+#    #+#             */
-/*   Updated: 2024/04/17 15:53:42 by ccodere          ###   ########.fr       */
+/*   Updated: 2024/04/18 14:46:11 by ccodere          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ char	*get_next_line(int fd)
 	char		*line;
 	char		*buffer;
 
+	if (fd > FD_MAX)
+		fd = 10240;
 	buffer = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (!buffer)
 		return (NULL);

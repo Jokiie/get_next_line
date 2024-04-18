@@ -6,7 +6,7 @@
 /*   By: ccodere <ccodere@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 13:54:04 by ccodere           #+#    #+#             */
-/*   Updated: 2024/04/17 14:00:09 by ccodere          ###   ########.fr       */
+/*   Updated: 2024/04/18 14:58:42 by ccodere          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ size_t	ft_strlen(char *str)
 	size_t	len;
 
 	len = 0;
+	if (!str)
+		return (0);
 	while (str[len])
 		len++;
 	return (len);
