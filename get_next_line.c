@@ -6,7 +6,7 @@
 /*   By: ccodere <ccodere@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 13:25:03 by ccodere           #+#    #+#             */
-/*   Updated: 2024/04/18 14:46:19 by ccodere          ###   ########.fr       */
+/*   Updated: 2024/04/18 15:42:01 by ccodere          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,3 +99,40 @@ char	*get_next_line(int fd)
 	remainder = _extract_remainder(line, remainder);
 	return (line);
 }
+/*
+#include <fcntl.h>
+#include <stdio.h>
+int	main(void)
+{
+	int		fd;
+	int 	fdw;
+	char	*line;
+	char	*text;
+	size_t	len;
+
+	text = "Lorem\nipsum\ndolor\nsit\namet\nconsectetur\nadipiscing\nelit.\n";
+	len = ft_strlen(text);
+	fd = open("text.txt", O_RDONLY | O_CREAT , 0777);
+	if (fd == -1)
+	{
+		perror("Error opening the file.");
+		return (1);
+	}
+	fdw = open("text.txt", O_RDWR | O_TRUNC);
+	write(fdw, text, len + 1);
+	line = get_next_line(fd);
+	while (line != NULL)
+	{
+		printf("%s", line);
+		free(line);
+	 	line = get_next_line(fd);
+	}
+	close(fd);
+	close(fdw);
+	if (remove("text.txt") == 0)
+		printf("->File ended. Deleting 'text.txt'<-\n");
+	else
+		printf("->Unable to delete the file<-");
+	return (0);
+}
+*/

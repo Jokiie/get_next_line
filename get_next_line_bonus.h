@@ -6,7 +6,7 @@
 /*   By: ccodere <ccodere@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 13:54:19 by ccodere           #+#    #+#             */
-/*   Updated: 2024/04/18 14:58:31 by ccodere          ###   ########.fr       */
+/*   Updated: 2024/04/18 15:03:09 by ccodere          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@
 
 # define FD_MAX 10240
 
-# include <fcntl.h>
 # include <stdlib.h>
 # include <unistd.h>
 
