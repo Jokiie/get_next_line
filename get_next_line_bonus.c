@@ -6,7 +6,7 @@
 /*   By: ccodere <ccodere@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 13:53:43 by ccodere           #+#    #+#             */
-/*   Updated: 2024/04/18 14:46:11 by ccodere          ###   ########.fr       */
+/*   Updated: 2024/04/19 09:39:17 by ccodere          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,12 +80,10 @@ char	*get_next_line(int fd)
 	char		*line;
 	char		*buffer;
 
-	if (fd > FD_MAX)
-		fd = 10240;
 	buffer = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (!buffer)
 		return (NULL);
-	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, &buffer, 0) < 0)
+	if (fd < 0 || fd > FD_MAX || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
 	{
 		free(buffer);
 		free(remainder[fd]);
@@ -101,3 +99,54 @@ char	*get_next_line(int fd)
 	remainder[fd] = _extract_remainder(line, remainder[fd]);
 	return (line);
 }
+// #include <fcntl.h>
+// #include <stdio.h>
+// int	main(void)
+// {
+// 	int		fd[FD_MAX];
+// 	char	*line;
+// 	char	*text[2];
+// 	size_t	len1;
+// 	size_t	len2;
+
+// 	text[0] = "Lorem\nipsum\ndolor\nsit\namet\nconsectetur\nadipiscing.\n";
+// 	len1 = ft_strlen(text[0]);
+
+// 	text[1] = "Arrays\nare used\nto store\nmultiple\nvalues.\n";
+// 	len2 = ft_strlen(text[1]);
+// 	fd[0] = open("text1.txt", O_RDONLY | O_CREAT , 0777);
+// 	if (fd[0] == -1)
+// 	{
+// 		perror("Error opening the file.");
+// 		return (1);
+// 	}
+// 	fd[1] = open("text1.txt", O_RDWR | O_TRUNC);
+// 	write(fd[1], text[0], len1 + 1);
+// 	fd[2] = open("text2.txt", O_RDONLY | O_CREAT , 0777);
+// 	if (fd[2] == -1)
+// 	{
+// 		perror("Error opening the file.");
+// 		return (1);
+// 	}
+// 	fd[3] = open("text2.txt", O_RDWR | O_TRUNC);
+// 	write(fd[3], text[1], len2 + 1);
+
+// 	printf("%s", get_next_line(fd[0]));
+// 	printf("%s", get_next_line(fd[2]));
+// 	printf("%s", get_next_line(fd[0]));
+// 	printf("%s", get_next_line(fd[2]));
+// 	printf("%s", get_next_line(fd[0]));
+// 	printf("%s", get_next_line(fd[2]));
+// 	printf("%s", get_next_line(fd[0]));
+// 	printf("%s", get_next_line(fd[2]));
+
+// 	close(fd[0]);
+// 	close(fd[1]);
+// 	close(fd[2]);
+// 	close (fd[3]);
+// 	if (remove("text1.txt") == 0 && remove("text2.txt") == 0)
+// 		printf("->File ended<-\n...deleted texts files successfully...\n");
+// 	else
+// 		printf("->Unable to delete the file<-");
+// 	return (0);
+// }
