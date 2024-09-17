@@ -6,11 +6,27 @@
 /*   By: ccodere <ccodere@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 13:53:43 by ccodere           #+#    #+#             */
-/*   Updated: 2024/04/19 09:39:17 by ccodere          ###   ########.fr       */
+/*   Updated: 2024/04/23 14:29:30 by ccodere          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
+
+static void _free_fd(char *tab[])
+{
+	int	i;
+
+	i = 0;
+	if (!tab)
+		return ;
+	while (tab[i])
+	{
+		free(tab[i]);
+		i++;
+	}
+	free(tab);
+	tab = NULL;
+}
 
 static char	*_append(char *remainder, char *buffer)
 {
@@ -36,7 +52,7 @@ static char	*_read_n_append(int fd, char *remainder, char *buffer)
 		if (chars_read == -1)
 		{
 			free(remainder);
-			return (0);
+			return (NULL);
 		}
 		else if (chars_read == 0)
 			break ;
@@ -83,7 +99,11 @@ char	*get_next_line(int fd)
 	buffer = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (!buffer)
 		return (NULL);
-	if (fd < 0 || fd > FD_MAX || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
+	if (read(fd, &line, 0) < 0)
+	{
+		_free_fd(remainder[fd]);
+	}
+	if (fd < 0 || fd > (FD_MAX - 1) || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
 	{
 		free(buffer);
 		free(remainder[fd]);
@@ -133,7 +153,7 @@ char	*get_next_line(int fd)
 
 // 	printf("%s", get_next_line(fd[0]));
 // 	printf("%s", get_next_line(fd[2]));
-// 	printf("%s", get_next_line(fd[0]));
+// 	printf("%s", get_next_line(42));
 // 	printf("%s", get_next_line(fd[2]));
 // 	printf("%s", get_next_line(fd[0]));
 // 	printf("%s", get_next_line(fd[2]));
